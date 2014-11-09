@@ -11,25 +11,30 @@ class ClsClientChat extends Thread
 	{
 		try
 		{
-			Socket objSocket = new Socket("192.168.1.95",1500); //Send request to server at given address:port
+			Socket objSocket = new Socket("127.0.0.1",1500); //Send request to server at given address:port
 			System.out.println("Connection established");
+
 			objDIS = new DataInputStream(objSocket.getInputStream());  //Input
 			objDOS = new DataOutputStream(objSocket.getOutputStream()); //Ouput
-			Gooey gui = new Gooey();  //Create GUI for client. Note that server doesnt need any gui.
-			System.out.println("Control after gooey object creation");
+
+			String name = JOptionPane.showInputDialog("Please enter your name:");
+
+			//Create GUI for client.
+			GUI gui = new GUI(name);
 
 			while(true)
 			{
-			    System.out.println("Control in while client");
+			    // System.out.println("Control in while client");
 				String serverMsg = objDIS.readUTF();  //Read message.
 				gui.printanswer(serverMsg); //Display message on GUI
 			}
 		}
 		catch(Exception e)
 		{
-			System.out.println("Server not found. Wut");
+			System.out.println("Server not found.");
 		}
 	}
+
 	static void printmsg(String text)
 	{
 		try
