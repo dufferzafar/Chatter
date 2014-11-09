@@ -1,17 +1,20 @@
+import javax.swing.JOptionPane;
 import java.net.*;
 import java.util.*;
 import java.io.*;
 
 class ClsClientChat extends Thread
 {
-	static DataInputStream objDIS; //For sending chats
-	static DataOutputStream objDOS; //For recieving chats
+	static DataInputStream objDIS;
+	static DataOutputStream objDOS;
 
 	public void run()
 	{
 		try
 		{
-			Socket objSocket = new Socket("127.0.0.1",1500); //Send request to server at given address:port
+			// Conenct with server
+			Socket objSocket = new Socket("127.0.0.1",1500);
+
 			System.out.println("Connection established");
 
 			objDIS = new DataInputStream(objSocket.getInputStream());  //Input
@@ -24,9 +27,9 @@ class ClsClientChat extends Thread
 
 			while(true)
 			{
-			    // System.out.println("Control in while client");
-				String serverMsg = objDIS.readUTF();  //Read message.
-				gui.printanswer(serverMsg); //Display message on GUI
+				String msgFromServer = objDIS.readUTF();
+				//Send message recieved from server to GUI
+				gui.printanswer(msgFromServer);
 			}
 		}
 		catch(Exception e)
@@ -35,11 +38,12 @@ class ClsClientChat extends Thread
 		}
 	}
 
-	static void printmsg(String text)
+	static void printmsg(String msgFromClient)
 	{
 		try
 		{
-			objDOS.writeUTF(text);  //Send message to server when recieved by GUI
+			//Send message recieved by GUI to server
+			objDOS.writeUTF(msgFromClient);
 		}
 		catch (Exception e)
 		{}

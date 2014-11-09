@@ -4,23 +4,21 @@ import java.io.*;
 
 class ClsServerChat extends Thread
 {
-	static DataInputStream objDIS; //For sending chats
-	static DataOutputStream objDOS;  //For recieving chats
+	static DataInputStream objDIS;
+	static DataOutputStream objDOS;
 
-	int i=0;  //Identity tag
+	int i=0;
 
 	public void run()
 	{
 		try
 		{
-			//InetAddress addname = InetAddress.getByName("192.168.1.95");
-			ServerSocket objServerSocket = new ServerSocket(1500);
+			ServerSocket serverSocket = new ServerSocket(1500);
 			System.out.println("Server connected");
 
 			while(true)
 			{
-			  //System.out.println("Waiting for Client to Connect");
-			  Socket clientSocket = objServerSocket.accept();
+			  Socket clientSocket = serverSocket.accept();
 			  // System.out.println("Client connected" + client.getRemoteSocketAddress().toString());
 
 			  ChatHandler clientHandler = new ChatHandler(clientSocket, i);
