@@ -4,12 +4,16 @@ import java.util.*;
 import java.net.*;
 import java.io.*;
 
+import java.text.SimpleDateFormat;
+
 public class GUI
 {
 	JEditorPane editor;
 	JFrame fr;
 	JScrollPane scrollPane;
 	JTextField tf;
+
+	SimpleDateFormat sdf;
 
 	String input = "";
 	String them = "";
@@ -23,22 +27,24 @@ public class GUI
 		catch (Exception e) {
 		}
 
+		sdf = new SimpleDateFormat("HH:mm:ss");
+
 		fr = new JFrame(username);
 		fr.setLayout(null);
 		fr.setResizable(false);
-		fr.setSize(200,400);
+		fr.setSize(300,400);
 
 		editor = new JEditorPane("text/html", text);
 		editor.setEditable(false);
 		fr.add(editor);
 
 		scrollPane = new JScrollPane(editor);
-		scrollPane.setBounds(0,0,200,335);
+		scrollPane.setBounds(0,0,300,335);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		fr.add(scrollPane);
 
 		tf = new JTextField();
-		tf.setBounds(0,340,200,30);
+		tf.setBounds(0,340,300,30);
 		fr.add(tf);
 
 		// fr.setAlwaysOnTop(true);
@@ -55,8 +61,9 @@ public class GUI
 					input = tf.getText();
 					if(!input.equals(""))
 					{
-						ClsClientChat.printmsg("<strong>" + username + ": </strong>" + input);
-						input = "<strong>You: </strong>" + input;
+						String time = sdf.format(new Date());
+						ClsClientChat.printmsg("<i>" + time + "</i> <b>" + username + ": </b>" + input);
+						input = "<i>" + time + "</i> <b>You: </b>" + input;
 						text = text + "<br>" + input;
 						editor.setText(text);
 						tf.setText("");
