@@ -22,19 +22,21 @@ class ClsClientChat extends Thread
 
 			String name = JOptionPane.showInputDialog("Please enter your name:");
 
-			//Create GUI for client.
+			printmsg("Username=" + name);
+
 			GUI gui = new GUI(name);
 
 			while(true)
 			{
-				String msgFromServer = objDIS.readUTF();
 				//Send message recieved from server to GUI
+				String msgFromServer = objDIS.readUTF();
 				gui.printanswer(msgFromServer);
 			}
 		}
 		catch(Exception e)
 		{
 			System.out.println("Server not found.");
+			System.exit(-1);
 		}
 	}
 

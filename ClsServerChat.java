@@ -4,9 +4,6 @@ import java.io.*;
 
 class ClsServerChat extends Thread
 {
-	static DataInputStream objDIS;
-	static DataOutputStream objDOS;
-
 	int i=0;
 
 	public void run()
@@ -14,18 +11,19 @@ class ClsServerChat extends Thread
 		try
 		{
 			ServerSocket serverSocket = new ServerSocket(1500);
-			System.out.println("Server connected");
+			System.out.println("Server started.");
 
 			while(true)
 			{
-			  Socket clientSocket = serverSocket.accept();
-			  // System.out.println("Client connected" + client.getRemoteSocketAddress().toString());
+				Socket clientSocket = serverSocket.accept();
 
-			  ChatHandler clientHandler = new ChatHandler(clientSocket, i);
-			  clientHandler.start();
+				ChatHandler clientHandler = new ChatHandler(clientSocket, i);
+				clientHandler.start();
 
-			  i++;
-		    }
+				System.out.println("\nClient connected: " + clientSocket.getRemoteSocketAddress().toString());
+
+				i++;
+			}
 		}
 		catch(Exception e)
 		{
