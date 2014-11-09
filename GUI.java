@@ -6,12 +6,14 @@ import java.io.*;
 
 public class GUI
 {
-	JFrame fr;
-	JTextField tf;
-	String text="";
 	JEditorPane editor;
-	String input;
+	JFrame fr;
 	JScrollPane scrollPane;
+	JTextField tf;
+
+	String input = "";
+	String them = "";
+	String text = "";
 
 	public GUI(final String username)
 	{
@@ -23,22 +25,26 @@ public class GUI
 
 		fr = new JFrame(username);
 		fr.setLayout(null);
+		fr.setResizable(false);
+		fr.setSize(200,400);
 
-		editor = new JEditorPane("text/html",text);
+		editor = new JEditorPane("text/html", text);
 		editor.setEditable(false);
 		fr.add(editor);
 
-		tf = new JTextField();
-		tf.setBounds(0,332,124,30);
-		fr.add(tf);
-
 		scrollPane = new JScrollPane(editor);
-		scrollPane.setBounds(0,0,185,330);
+		scrollPane.setBounds(0,0,200,335);
 		scrollPane.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
 		fr.add(scrollPane);
 
-		fr.setSize(200,400);
+		tf = new JTextField();
+		tf.setBounds(0,340,200,30);
+		fr.add(tf);
+
+		// fr.setAlwaysOnTop(true);
+		// fr.setLocationRelativeTo(null);
 		fr.setVisible(true);
+        tf.requestFocusInWindow();
 
 		tf.addKeyListener(new KeyAdapter()
 		{
@@ -49,7 +55,7 @@ public class GUI
 					input = tf.getText();
 					if(!input.equals(""))
 					{
-						ClsClientChat.printmsg("<strong>" + username + ": </strong>" +input);
+						ClsClientChat.printmsg("<strong>" + username + ": </strong>" + input);
 						input = "<strong>You: </strong>" + input;
 						text = text + "<br>" + input;
 						editor.setText(text);
@@ -62,8 +68,10 @@ public class GUI
 		fr.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 	}
 
-	public void printanswer(String txt)
+	public void printanswer(String recieved)
 	{
-		editor.setText(text + "<br>" + txt );
+		them = recieved;
+		text = text + "<br>" + them ;
+		editor.setText(text);
 	}
 }
