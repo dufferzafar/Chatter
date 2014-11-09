@@ -4,6 +4,10 @@ Java based chat application. Created as an assignment for Networks course.
 
 Initial code copied from [kwikad/Chatter](https://github.com/kwikadi/Chatter)
 
+# Screenshot
+
+![One hell of a screenshot.](http://i.imgur.com/5BuQXdT.png)
+
 # Todo
 
 * Rename all files
