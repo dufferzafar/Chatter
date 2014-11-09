@@ -2,7 +2,7 @@ import java.net.*;
 import java.util.*;
 import java.io.*;
 
-class ChatterBegin
+class RunServer
 {
 	public static void main(String args[])
 	{
@@ -15,8 +15,5 @@ class ChatterBegin
 			ClsServerChat server = new ClsServerChat();
 			server.start();
 		}
-
-		ClsClientChat client = new ClsClientChat();
-		client.start();
 	}
 }
