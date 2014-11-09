@@ -11,37 +11,35 @@ public class ChatHandler extends Thread
 
 	public ChatHandler(Socket s, int id) throws IOException
 	{
-	   this.s=s;
-		this.id=id;
-		i=new DataInputStream(new BufferedInputStream(s.getInputStream()));
-		o=new DataOutputStream(new BufferedOutputStream(s.getOutputStream()));
-		//connections establish
-		//thread on
+		this.s = s;
+		this.id = id;
+		i = new DataInputStream(new BufferedInputStream(s.getInputStream()));
+		o = new DataOutputStream(new BufferedOutputStream(s.getOutputStream()));
 	}
 
 	protected static Vector handlers=new Vector();
 
 	public void run()
 	{
-	   try
-	   {
-         handlers.add(this);  //Add current connection to dynamic array.
-         while(true)
-         {
-	         String msg=i.readUTF(); //Read message from client
-	         broadcast(msg, this.id); //Send to all clients except sending cliet
+		try
+		{
+			handlers.add(this);  //Add current connection to dynamic array.
+			while(true)
+			{
+				String msg = i.readUTF(); //Read message from client
+				broadcast(msg, this.id);
 			}
 		}
 		catch (IOException ex)
-	   {
+		{
 			ex.printStackTrace();
-      }
-	   finally
-	   {
-         handlers.remove(this);
-         try
-         {
-				s.close ();
+		}
+		finally
+		{
+			handlers.remove(this);
+			try
+			{
+				s.close();
 			}
 			catch (IOException ex)
 			{
@@ -57,21 +55,21 @@ public class ChatHandler extends Thread
 			Iterator e=handlers.iterator();  //Iterate through all clients
 			while(e.hasNext())
 			{
-				ChatHandler c=(ChatHandler) e.next();
+				ChatHandler c = (ChatHandler) e.next();
 				try
 				{
 					synchronized(c.o)
 					{
 						if(c.id != id) //Check if client is not the sender.
-							c.o.writeUTF(message);  //Send message if not the sender.
+							c.o.writeUTF(message);
+						}
+						c.o.flush();
 					}
-					c.o.flush();
-				}
-				catch(IOException ex)
-				{
-					c.stop();
+					catch(IOException ex)
+					{
+						c.stop();
+					}
 				}
 			}
 		}
 	}
-}
