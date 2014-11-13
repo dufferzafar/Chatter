@@ -12,8 +12,8 @@ class RunServer
 		}
 		catch (IOException ex)
 		{
-			ClsServerChat server = new ClsServerChat();
-			server.start();
+			Server s = new Server();
+			s.start();
 		}
 	}
 }

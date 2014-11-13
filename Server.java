@@ -2,7 +2,7 @@ import java.net.*;
 import java.util.*;
 import java.io.*;
 
-class ClsServerChat extends Thread
+class Server extends Thread
 {
 	int i=0;
 

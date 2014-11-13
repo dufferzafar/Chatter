@@ -3,7 +3,7 @@ import java.net.*;
 import java.util.*;
 import java.io.*;
 
-class ClsClientChat extends Thread
+class Client extends Thread
 {
 	static DataInputStream objDIS;
 	static DataOutputStream objDOS;

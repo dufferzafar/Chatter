@@ -10,7 +10,6 @@ Initial code copied from [kwikad/Chatter](https://github.com/kwikadi/Chatter)
 
 # Todo
 
-* Rename all files
 * Modify UI
   * Use a layout manager to resize properly
 

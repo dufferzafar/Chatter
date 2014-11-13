@@ -62,7 +62,7 @@ public class GUI
 					if(!input.equals(""))
 					{
 						String time = sdf.format(new Date());
-						ClsClientChat.printmsg("<i>" + time + "</i> <b>" + username + ": </b>" + input);
+						Client.printmsg("<i>" + time + "</i> <b>" + username + ": </b>" + input);
 						input = "<i>" + time + "</i> <b>You: </b>" + input;
 						text = text + "<br>" + input;
 						editor.setText(text);
