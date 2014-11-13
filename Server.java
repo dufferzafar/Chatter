@@ -81,12 +81,19 @@ class ChatHandler extends Thread
 					{
 						msg = "<i>" + mat.group(1) + "</i> <b>" + mat.group(2) + ": </b>" + mat.group(4);
 
+						// More than one person -> Multicast
+						if (mat.group(3).contains(","))
+							msg = "<font color = \"blue\">" + msg + "</font>";
+						else
+							msg = "<font color = \"green\">" + msg + "</font>";
+
 						// Unicast or Multicast
 						sendmessage(msg, this.id, mat.group(3));
 					}
 					else
 					{
 						// Broadcast
+						msg = "<font color = \"red\">" + msg + "</font>";
 						sendmessage(msg, this.id, "");
 					}
 				}
