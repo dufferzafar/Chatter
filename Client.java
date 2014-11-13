@@ -20,7 +20,14 @@ class Client extends Thread
 			objDIS = new DataInputStream(objSocket.getInputStream());  //Input
 			objDOS = new DataOutputStream(objSocket.getOutputStream()); //Ouput
 
-			String name = JOptionPane.showInputDialog("Please enter your name:");
+			String name;
+
+			do
+			{
+				name = JOptionPane.showInputDialog("Please enter your username:");
+				if (name == null || name.isEmpty())
+					JOptionPane.showMessageDialog(null, "The username you entered is not correct.\n\nPlease try again.");
+			} while(name == null || name.isEmpty());
 
 			printmsg("Username=" + name);
 
