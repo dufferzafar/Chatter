@@ -1,4 +1,4 @@
-# Chatter
+# Chature
 
 Java based chat application. Created as an assignment for Networks course.
 
